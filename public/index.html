@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connecty</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <h2>Connecty</h2>
+
+  <button onclick="testFTP()">Test FTP Connection</button>
+  <div id="ftp-status"></div>
+
+    <label for="pickup">Current Pickup Folder Name:</label>
+    <input type="text" id="pickup" placeholder="Enter folder to duplicate">
+
+    <label for="update">New Updated Folder Name:</label>
+    <input type="text" id="update" placeholder="Enter new folder name">
+
+    <label for="fileUpload">Upload New Images:</label>
+    <label for="fileUpload" class="custom-file-upload">
+      Choose Files
+    </label>
+    <span id="file-name">No file chosen</span>
+    <input type="file" id="fileUpload" multiple>
+    <p></p>
+
+    <button onclick="startProcess()">Start Process</button>
+
+    <div id="progressBar"><div id="progress"></div></div>
+
+    <p style="margin-bottom: 5px;">New URL:</p>
+    <div id="newUrl" onclick="copyUrl()">Click to Copy</div>
+
+    <script>
+        function startProcess() {
+            let pickup = document.getElementById('pickup').value;
+            let update = document.getElementById('update').value;
+            let files = document.getElementById('fileUpload').files;
+            
+            if (!pickup || !update) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("pickup", pickup);
+            formData.append("update", update);
+            for (let file of files) {
+                formData.append("files", file);
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/process-ftp", true);
+            xhr.upload.onprogress = function (e) {
+                if (e.lengthComputable) {
+                    let percent = (e.loaded / e.total) * 100;
+                    document.getElementById("progress").style.width = percent + "%";
+                }
+            };
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText);
+                    document.getElementById("newUrl").textContent = response.newFolderURL;
+                } else {
+                    alert("Error processing request.");
+                }
+            };
+
+            xhr.send(formData);
+        }
+
+        function copyUrl() {
+            let urlField = document.getElementById("newUrl");
+            navigator.clipboard.writeText(urlField.textContent);
+            alert("Copied URL: " + urlField.textContent);
+        }
+    </script>
+
+    <script>
+      async function testFTP() {
+          const statusDiv = document.getElementById("ftp-status");
+          statusDiv.style.display = "block";
+          statusDiv.innerHTML = "⏳ Testing FTP connection...";
+
+          try {
+              const response = await fetch("/test-ftp");
+              const text = await response.text();
+
+              if (response.ok) {
+                  statusDiv.style.color = "green";
+                  statusDiv.innerHTML = "✅ " + text;
+              } else {
+                  statusDiv.style.color = "red";
+                  statusDiv.innerHTML = "❌ " + text;
+              }
+          } catch (error) {
+              statusDiv.style.color = "red";
+              statusDiv.innerHTML = "❌ Error: " + error.message;
+          }
+      }
+    </script>
+
+    <script>
+      document.getElementById("fileUpload").addEventListener("change", function() {
+          let fileList = this.files;
+          let fileNameDisplay = document.getElementById("file-name");
+      
+          if (fileList.length > 0) {
+              let names = [];
+              for (let i = 0; i < fileList.length; i++) {
+                  names.push(fileList[i].name);
+              }
+              fileNameDisplay.textContent = names.join(", ");
+          } else {
+              fileNameDisplay.textContent = "No file chosen";
+          }
+      });
+    </script>
+</body>
+</html>
