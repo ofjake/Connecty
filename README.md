@@ -3,7 +3,7 @@
 It facilitates seamless file transfers using **basic-ftp**, with file handling powered by **Multer** and **fs-extra**.  
 Ensure you have **Node.js** installed. If not, download it from [nodejs.org](https://nodejs.org/).  
 
-## Installation & Setup  
+### Installation & Setup  
 
 #### 1 Clone the Repository  
 ```sh
