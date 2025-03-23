@@ -21,7 +21,20 @@ npm init -y
 npm install express multer basic-ftp fs-extra path
 ```
 
-#### 4 Run the Application
+#### 4 In the server.js file, update FTP credentials
+```sh
+host: "ftp.XXX.XXX.com", // add FTP info here
+user: "XXX",
+password: "XXXXXXXX",
+```
+
+#### 5 In the same file, update the pickup folder and the destination (or update) folder paths
+```sh
+const pickupPath = `/Folder/${pickup}`; // Ftp directory to folder being duplicated
+const updatePath = `/Folder/${update}`; // Ftp directory to folder being created and updated
+```
+
+#### 6 Run the Application
 ```sh
 npm run dev
 ```
