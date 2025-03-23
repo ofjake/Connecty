@@ -1,21 +1,40 @@
-# **Connecty**
+# **Connecty** 
+**Connecty is a lightweight FTP automation tool built with **Node.js** and **Express**.**<br>
+It facilitates seamless file transfers using **basic-ftp**, with file handling powered by **Multer** and **fs-extra**.  
+Ensure you have **Node.js** installed. If not, download it from [nodejs.org](https://nodejs.org/).  
 
-### To implement this FTP automation with JavaScript (Node.js + Express), follow these steps:
+## Installation & Setup  
 
-#### Step 1: Ensure you have Node.js installed. 
-If not, download it from [nodejs.org](https://nodejs.org/)
+#### 1 Clone the Repository  
+```sh
+git clone https://github.com/ofjake/Connecty.git
+cd Connecty  
+```
 
-#### Step 2: Initialize the project:
-cd Connecty && npm init -y
+#### 2 Initialize the Project
+```sh
+npm init -y
+```
 
-#### Step 3: Install the required dependencies:
-npm install --save express multer basic-ftp fs-extra path
+#### 3 Install Dependencies
+```sh
+npm install express multer basic-ftp fs-extra path
+```
 
-#### Step 4: Run the Application
+#### 4 Run the Application
+```sh
 npm run dev
-Visit: http://localhost:3000
+```
 
-Only really meant to be run locally 🚀
+Once the server is running, visit: http://localhost:3000
+Note: This application is designed for local use only.
+
+#### Features
++ Automated FTP Uploads
++ Seamless File Handling with Multer
+
+##### Contributing
+I welcome any feedback or suggestions for improving this repository.
 
 ##### Credits:
 This project is created by JakeRMiller. 
