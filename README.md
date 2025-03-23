@@ -28,7 +28,7 @@ user: "XXX",
 password: "XXXXXXXX",
 ```
 
-#### 5 In the same file, update the pickup folder and the destination (or update) folder paths
+#### 5 In the same file, update the pickup 'Folder' and the destination (or update) 'Folder' paths
 ```sh
 const pickupPath = `/Folder/${pickup}`; // Ftp directory to folder being duplicated
 const updatePath = `/Folder/${update}`; // Ftp directory to folder being created and updated
