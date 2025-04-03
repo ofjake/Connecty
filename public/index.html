@@ -19,15 +19,17 @@
         <input type="text" id="update" placeholder="Enter new updated folder name">
       </div>
       <div class="content-large">
-        <label for="fileUpload" class="custom-file-upload">Upload New Images <span id="file-name"></span></label>
-        <input type="file" id="fileUpload" multiple>
+        <form id="uploadForm">
+          <label for="fileUpload" id="dropZone" class="custom-file-upload">Upload New Images <span id="file-name"></span></label>
+          <input type="file" id="fileUpload" name="files" multiple hidden>
+        </form>
       </div>
     </div>
     <div id="full-width">
-      <button onclick="startProcess()">Start Process</button>
+      <button id="startProcessButton" onclick="startProcess()">Start Process</button>
     </div>
     <div id="progressBar"><div id="progress">
-      <div id="newUrl" onclick="copyUrl()" style="opacity: 0;">Click to copy new URL</div>
+      <div id="newUrl" onclick="copyUrl()" style="opacity: 0;"></div>
     </div></div>
   </main>
   <script src="scripts.js"></script>
