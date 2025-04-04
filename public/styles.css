@@ -8,6 +8,11 @@ input[type="text"], input[type="file"] {margin-bottom: 14px;padding:23px;border-
 h2 {color: var(--brandcolor);font-size: 2rem;}
 button {background-color: var(--button);  color: var(--white); cursor: pointer; transition: background-color 0.3s ease;border-radius: 15px;font-size: 16px;font-weight: bold; padding: 10px 5px;height: 70px; border: none; outline: none;}
 button:hover {background-color: var(--highlight);color: var(--white);}
+.pulsing {animation: pulse 0.25s infinite alternate;}
+@keyframes pulse {
+  0% {background-color: var(--button);}
+  100% {background-color: var(--highlight);}
+}
 input[type="file"] {display: none;}
 #progressBar {width: 100%; background: var(--offbgcolor);border-radius: 15px;}
 #progress {width: 0%; background: var(--highlight);border-radius: 15px;}
