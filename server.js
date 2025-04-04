@@ -57,7 +57,7 @@ app.post("/process-ftp", upload.array("files"), async (req, res) => {
     const pickupPath = `/Folder/${pickup}`;
     const updatePath = `/Folder/${update}`;
 
-    // Step 1: Duplicate Pickup Folder to Update
+    // Duplicate Pickup Folder to Update
     await client.ensureDir(updatePath);
     await client.cd(pickupPath);
     const fileList = await client.list();
@@ -90,7 +90,6 @@ app.post("/process-ftp", upload.array("files"), async (req, res) => {
         await fs.writeFile(tempFilePath, updatedContent, "utf8");
         await client.uploadFrom(tempFilePath, htmlFilePath);
 
-        // **NEW: Save a copy of modified HTML for download**
         const downloadsFolder = path.join(__dirname, "downloads");
         await fs.mkdir(downloadsFolder, { recursive: true }); // Ensure folder exists
 
@@ -99,7 +98,7 @@ app.post("/process-ftp", upload.array("files"), async (req, res) => {
       }
     }
 
-    // Step 3: Upload New Files (Overwriting Existing Ones)
+    // Upload New Files (Overwriting Existing Ones)
     for (let uploadedFile of req.files) {
       const destinationFile = `${updatePath}/${uploadedFile.originalname}`;
       await client.uploadFrom(uploadedFile.path, destinationFile);
@@ -120,13 +119,13 @@ app.post("/process-ftp", upload.array("files"), async (req, res) => {
     }
   });
 
-// 🖥 Serve Modified HTML Files for Download
+// Serve Modified HTML Files for Download
 app.get("/download/:filename", async (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join(__dirname, "downloads", filename);
   
   try {
-      //  Check if the file exists
+      // Check if the file exists
       await fs.access(filePath);
       res.download(filePath, filename);
   } catch (error) {
