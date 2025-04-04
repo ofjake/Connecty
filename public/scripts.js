@@ -1,7 +1,32 @@
+  let droppedFiles = [];
+
+  // drag and drop
+  document.addEventListener("DOMContentLoaded", function () {
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("fileUpload");
+
+    dropZone.addEventListener("click", () => fileInput.click());
+
+    dropZone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone.classList.add("drag-over");
+    });
+
+    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
+
+    dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone.classList.remove("drag-over");
+        droppedFiles = Array.from(event.dataTransfer.files);
+        updateFileNameDisplay();
+    });
+  });
+  
   function startProcess() {
     let pickup = document.getElementById('pickup').value;
     let update = document.getElementById('update').value;
-    let files = document.getElementById('fileUpload').files;
+    let fileInput = document.getElementById("fileUpload");
+    let selectedFiles = Array.from(fileInput.files);
     let startProcessButton = document.getElementById("startProcessButton");
       
     if (!pickup || !update) {
@@ -17,9 +42,14 @@
     let formData = new FormData();
     formData.append("pickup", pickup);
     formData.append("update", update);
-    for (let file of files) {
+
+    selectedFiles.forEach(file => {
       formData.append("files", file);
-    }
+    });
+
+    droppedFiles.forEach(file => {
+      formData.append("files", file);
+    });
   
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/process-ftp", true);
@@ -47,34 +77,6 @@
   
     xhr.send(formData);
   }
-  
-  // drag and drop
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementById("fileUpload");
-    const uploadForm = document.getElementById("uploadForm");
-    let droppedFiles = [];
-    
-    dropZone.addEventListener("click", () => fileInput.click());
-
-    dropZone.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        dropZone.classList.add("drag-over");
-    });
-
-    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
-
-    dropZone.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dropZone.classList.remove("drag-over");
-        droppedFiles = Array.from(event.dataTransfer.files);
-        updateFileNameDisplay();
-    });
-
-    fileInput.addEventListener("change", () => {
-        droppedFiles = Array.from(fileInput.files);
-        updateFileNameDisplay();
-    });
 
     function updateFileNameDisplay() {
         const fileNameSpan = document.getElementById("file-name");
@@ -99,7 +101,7 @@
         })
         .then(response => response.json())
     });
-  });
+
 
   function copyUrl() {
     let urlField = document.getElementById("newUrl");
