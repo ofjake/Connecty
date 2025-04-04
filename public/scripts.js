@@ -10,7 +10,7 @@
     }
 
     startProcessButton.disabled = true;
-    startProcessButton.style.backgroundColor = "var(--highlight)";
+    startProcessButton.classList.add("pulsing");
     startProcessButton.style.pointerEvents = "none";
     startProcessButton.textContent = "Working...";
   
@@ -30,16 +30,18 @@
         document.getElementById("newUrl").textContent = response.newFolderURL;
         document.getElementById("progress").style.width = "100%";
         document.getElementById("newUrl").style.opacity = "1";
-        startProcessButton.disabled = false;
-        startProcessButton.style.backgroundColor = "var(--button)";
-        startProcessButton.style.pointerEvents = "auto"; 
-        startProcessButton.textContent = "Start Process";
+        startProcessButton.disabled = true;
+        startProcessButton.classList.remove("pulsing");
+        startProcessButton.style.backgroundColor = "var(--highlight)";
+        startProcessButton.style.pointerEvents = "none"; 
+        startProcessButton.textContent = "Click URL Below to Copy";
       } else {
         alert("Error processing request.");
-        startProcessButton.disabled = false;
-        startProcessButton.style.backgroundColor = "var(--button)";
-        startProcessButton.style.pointerEvents = "auto";
-        startProcessButton.textContent = "Start Process";
+        startProcessButton.disabled = true;
+        startProcessButton.classList.remove("pulsing");
+        startProcessButton.style.backgroundColor = "var(--highlight)";
+        startProcessButton.style.pointerEvents = "none";
+        startProcessButton.textContent = "Refresh Page and Try Again";
       }
     };
   
