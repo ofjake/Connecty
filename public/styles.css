@@ -16,7 +16,7 @@ button:hover {background-color: var(--highlight);color: var(--white);}
 input[type="file"] {display: none;}
 #progressBar {width: 100%; background: var(--offbgcolor);border-radius: 15px;}
 #progress {width: 0%; background: var(--highlight);border-radius: 15px;}
-#newUrl {padding: 8px 20px 9px; margin-top: 0px; cursor: copy; font-size:14px; color: var(--button); word-break: break-word;}
+#newUrl {padding: 8px 20px 9px; margin-top: 0px; cursor: copy; font-size:14px; color: var(--white); font-weight:bold; word-break: break-word;}
 #file-name {color:var(--white);}
 #ftp-status {padding: 10px;text-align:center;}
 .custom-file-upload {display: flex;flex-direction: column;justify-content: center;padding: 26px 20px;height: 107px;background-color: var(--button);color: var(--white);text-align: center;font-size: 16px;font-weight: bold;border-radius: 15px;cursor: pointer;transition: background-color 0.3s ease;}
