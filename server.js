@@ -105,10 +105,14 @@ app.post("/process-ftp", upload.array("files"), async (req, res) => {
     }
 
     // Return Success with New FTP URL
+    const webviewFile = fileList.find(f => f.name.startsWith('webview') && (f.name.endsWith('.html') || f.name.endsWith('.htm')));
+    const webviewFileName = webviewFile ? webviewFile.name : 'webview.html'; // fallback to .html if not found
+
+    // Return Success with New FTP URL
     res.json({
       message: "FTP process completed successfully!",
-      newFolderURL: `https://www.yoursite.com/Folder/${update}/index.htm`,
-      downloadHTML: `/download/${fileList.find(f => f.name.endsWith('.htm'))?.name}`
+      newFolderURL: `https://www.yoursite.com/Folder/${update}/${webviewFileName}`,
+      downloadHTML: `/download/${fileList.find(f => f.name.endsWith('.html') || f.name.endsWith('.htm'))?.name}`
     });
 
     } catch (error) {
