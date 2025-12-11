@@ -1,4 +1,4 @@
-# **[Connecty](https://jakermiller.com/Connecty)** 
+# **[Connecty](https://jakermiller.com/projects/Connecty/Connecty.html)** 
 **Connecty is a lightweight FTP automation tool built with **Node.js** and **Express**.**<br>
 It facilitates seamless file transfers using **basic-ftp**, with file handling powered by **Multer** and **fs-extra**.  
 Ensure you have **Node.js** installed. [nodejs.org](https://nodejs.org/)
