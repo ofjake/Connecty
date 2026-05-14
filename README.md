@@ -39,7 +39,7 @@ const updatePath = `/Folder/${update}`; // Ftp directory to folder being created
 npm run dev
 ```
 
-Once the server is running, visit: http://localhost:3000
+Once the server is running, visit localhost
 Note: This application is designed for local use only.
 
 #### Features
