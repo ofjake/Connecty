@@ -39,8 +39,7 @@ const updatePath = `/Folder/${update}`; // Ftp directory to folder being created
 npm run dev
 ```
 
-Once the server is running, visit localhost
-Note: This application is designed for local use only.
+Once the server is running, visit localhost. Note: This application is designed for local use only.
 
 #### Features
 + Automated FTP Uploads
